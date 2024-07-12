@@ -1,6 +1,7 @@
 build/
 .vscode/
 testcases/
+IRtoAsm/
 
 *.a
 *.o
