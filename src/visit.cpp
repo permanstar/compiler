@@ -81,7 +81,6 @@ void Visit(const koopa_raw_slice_t &slice)
             Visit(reinterpret_cast<koopa_raw_value_t>(ptr));
             break;
         default:
-            // 我们暂时不会遇到其他内容, 于是不对其做任何处理
             assert(false);
         }
     }
@@ -288,7 +287,6 @@ void Visit(const koopa_raw_value_t &value)
         Visit(kind.data.get_ptr, value);
         break;
     default:
-        // 其他类型暂时遇不到
         std::cerr << kind.tag << std::endl;
         assert(false);
     }
@@ -1015,7 +1013,9 @@ void Visit(const koopa_raw_get_elem_ptr_t &get_elem_ptr, const koopa_raw_value_t
     if (reg_push)
     {
         reg_stack.push(index_reg);
-    }else{
+    }
+    else
+    {
         reg_stack.push(reg_to_push);
     }
     reg_stack.push(src_reg);
@@ -1119,7 +1119,9 @@ void Visit(const koopa_raw_get_ptr_t &get_ptr, const koopa_raw_value_t &value)
     if (reg_push)
     {
         reg_stack.push(index_reg);
-    }else{
+    }
+    else
+    {
         reg_stack.push(reg_to_push);
     }
     reg_stack.push(src_reg);

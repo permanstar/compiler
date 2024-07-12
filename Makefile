@@ -93,6 +93,13 @@ $(BUILD_DIR)/%.tab$(FB_EXT): $(SRC_DIR)/%.y
 	$(BISON) $(BFLAGS) -o $@ $<
 
 
+#knc
+testasm: hello.asm
+	clang hello.asm -c -o tr.o -target riscv32-unknown-linux-elf -march=rv32im -mabi=ilp32
+	ld.lld tr.o -L$(CDE_LIBRARY_PATH)/riscv32 -lsysy -o tr.out
+	qemu-riscv32 tr.out
+
+
 .PHONY: clean
 
 clean:

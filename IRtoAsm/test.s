@@ -205,7 +205,7 @@ f1_entry:
 mv    t0, a0
 li    t1, 0
 slli  t2, t1, 2
-add   t0, t0, t2
+add   t0, t0, t2 #0x0001135c 
 sw    t0, 0(sp)
 
 lw    t0, 0(sp)
@@ -1991,7 +1991,7 @@ li    t1, 4332
 add   t1, t1, sp
 lw    a0, 0(t1)
 
-li    t3, 4024
+li    t3, 4148
 add   t3, t3, sp
 lw    t2, 0(t3)
 li    t4, 4148
@@ -2478,7 +2478,7 @@ li    t1, 4332
 add   t1, t1, sp
 lw    a0, 0(t1)
 
-li    t2, 4164
+li    t2, 4280
 add   t2, t2, sp
 lw    t3, 0(t2)
 li    t4, 4280
