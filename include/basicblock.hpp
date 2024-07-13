@@ -17,6 +17,7 @@ class BasicBlockManager{
     int andCounter=-1;//用来给and块起名的
     int orCounter=-1;//用来给or块起名的
     int whileCounter=-1;//用来给while块起名的
+    bool returnflag=false;//用来标记是否有return语句
     std::vector<int> while_stack;
 
     void enterBasicBlock();

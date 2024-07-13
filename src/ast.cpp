@@ -296,6 +296,8 @@ void VarDefAST::array_dump(){
 
 //ifelse块的打印
 void IfElseAST::dump(){
+    bool if_return_flag=false;
+    bool else_return_flag=false;
     exp->up_calc();
     ++bbm.ifCounter;
     if(bbm.CheckEndBl()) return;
@@ -316,17 +318,22 @@ void IfElseAST::dump(){
     //打印thenpart
     bbm.CreateBasicBlock(thenLable);
     then_part->dump();
+    if_return_flag=bbm.returnflag;
+    bbm.returnflag=false;
     bbm.BlockJump(mergeLable);
 
     //打印elsepart
     if(else_part){
         bbm.CreateBasicBlock(elseLable);
         else_part->dump();
+        else_return_flag=bbm.returnflag;
+        bbm.returnflag=false;
         bbm.BlockJump(mergeLable); 
     }
 
     //打印merge部分
-    bbm.CreateBasicBlock(mergeLable);
+    if((!if_return_flag)||(!else_return_flag))
+        bbm.CreateBasicBlock(mergeLable);
 
 }
 
@@ -450,6 +457,8 @@ void ReturnAST::dump() {
     }
     else
         std::cout<<"ret"<<std::endl;
+    //Todo:有机会优化
+    bbm.returnflag=true;
     bbm.generateRetOrJump();
 }
 

@@ -53,6 +53,7 @@ int main(int argc, const char *argv[]) {
     return 1;
   }
   //区分不同的mode
+  //采用-koopa模式
   if(mode[1]=='k'){
     parsefilename=output;
     parseGrammar(parsefilename);
