@@ -555,8 +555,15 @@ void Visit(const koopa_raw_binary_t &binary, const koopa_raw_value_t &value, con
         {
             if (!rhs_is_integer)
                 std::cout << std::setw(6) << ir_asm_binaryop[binary.op] << reg << ", " << lhs << ", " << rhs << std::endl;
+            else if (atoi(rhs.c_str()) < -2048 || atoi(rhs.c_str()) > 2047)
+            {
+                std::cout << std::setw(6) << "li" << reg_stack.top() << ", " << rhs << std::endl;
+                std::cout << std::setw(6) << ir_asm_binaryop[binary.op] << reg << ", " << lhs << ", " << reg_stack.top() << std::endl;
+            }
             else
+            {
                 std::cout << std::setw(6) << std::string(ir_asm_binaryop[binary.op]) + 'i' << reg << ", " << lhs << ", " << rhs << std::endl;
+            }
         }
         else
         {
